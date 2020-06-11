@@ -7,11 +7,13 @@ void rearrange(int* a, int* b, int* c){
         int tmp = *a;
         *a = *b;
         *b = tmp;
+        rearrange(a,b,c);
     }
-    if(*b > *c){
+    else if(*b > *c){
         int tmp = *b;
         *b = *c;
         *c = tmp;
+        rearrange(a,b,c);
     }
 }
 
@@ -31,12 +33,11 @@ void printNum(char order, int *a, int* b, int* c){
 
 int main(int argc, char* argv[]){
     unsigned int a, b, c;
-    char order[3];
+    char order[4];
     scanf("%d %d %d", &a, &b, &c);
-    scanf("%s", &order);
+    scanf("%s", order);
     int *pA = &a, *pB = &b, *pC = &c;
-    while(*pC < *pB && *pB > *pA)
-        rearrange(pA, pB, pC);
+    rearrange(pA, pB, pC);
     for(int i = 0; i <= 3; i++)
         printNum(order[i], pA, pB, pC);
     printf("\n");
